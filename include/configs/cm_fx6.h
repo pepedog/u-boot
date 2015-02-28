@@ -110,9 +110,11 @@
 	"stderr=serial,vga\0" \
 	"panel=HDMI\0" \
 	"autoload=no\0" \
-	"kernel=uImage-cm-fx6\0" \
+	"kernel=uImage\0" \
+	"zimage=zImage\0" \
+	"uimage=uImage\0" \
 	"script=boot.scr\0" \
-	"dtb=cm-fx6.dtb\0" \
+	"dtb=imx6q-sbc-fx6m.dtb\0" \
 	"bootm_low=18000000\0" \
 	"loadaddr=0x10800000\0" \
 	"fdtaddr=0x11000000\0" \
@@ -122,10 +124,10 @@
 	"video_dvi=mxcfb0:dev=dvi,1280x800M-32@50,if=RGB32\0" \
 	"doboot=bootm ${loadaddr}\0" \
 	"doloadfdt=false\0" \
-	"setboottypez=setenv kernel zImage-cm-fx6;" \
+	"setboottypez=setenv kernel ${zimage};" \
 		"setenv doboot bootz ${loadaddr} - ${fdtaddr};" \
 		"setenv doloadfdt true;\0" \
-	"setboottypem=setenv kernel uImage-cm-fx6;" \
+	"setboottypem=setenv kernel ${uimage};" \
 		"setenv doboot bootm ${loadaddr};" \
 		"setenv doloadfdt false;\0"\
 	"mmcroot=/dev/mmcblk0p2 rw rootwait\0" \
