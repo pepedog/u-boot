@@ -110,11 +110,11 @@
 	"stderr=serial,vga\0" \
 	"panel=HDMI\0" \
 	"autoload=no\0" \
-	"kernel=uImage\0" \
-	"zimage=zImage\0" \
-	"uimage=uImage\0" \
+	"kernel=boot/uImage\0" \
+	"zimage=boot/zImage\0" \
+	"uimage=boot/uImage\0" \
 	"script=boot.scr\0" \
-	"dtb=imx6q-sbc-fx6m.dtb\0" \
+	"dtb=boot/dtbs/imx6q-sbc-fx6m.dtb\0" \
 	"bootm_low=18000000\0" \
 	"loadaddr=0x10800000\0" \
 	"fdtaddr=0x11000000\0" \
@@ -130,8 +130,8 @@
 	"setboottypem=setenv kernel ${uimage};" \
 		"setenv doboot bootm ${loadaddr};" \
 		"setenv doloadfdt false;\0"\
-	"mmcroot=/dev/mmcblk0p2 rw rootwait\0" \
-	"sataroot=/dev/sda2 rw rootwait\0" \
+	"mmcroot=/dev/mmcblk0p1 rw rootwait\0" \
+	"sataroot=/dev/sda1 rw rootwait\0" \
 	"nandroot=/dev/mtdblock4 rw\0" \
 	"nandrootfstype=ubifs\0" \
 	"mmcargs=setenv bootargs console=${console} root=${mmcroot} " \
@@ -152,9 +152,9 @@
 	"run_eboot=echo Starting EBOOT ...; "\
 		"mmc dev 2 && " \
 		"mmc rescan && mmc read 10042000 a 400 && go 10042000\0" \
-	"loadscript=load ${storagetype} ${storagedev} ${loadaddr} ${script};\0"\
-	"loadkernel=load ${storagetype} ${storagedev} ${loadaddr} ${kernel};\0"\
-	"loadfdt=load ${storagetype} ${storagedev} ${fdtaddr} ${dtb};\0" \
+	"loadscript=ext4load ${storagetype} ${storagedev} ${loadaddr} ${script};\0"\
+	"loadkernel=ext4load ${storagetype} ${storagedev} ${loadaddr} ${kernel};\0"\
+	"loadfdt=ext4load ${storagetype} ${storagedev} ${fdtaddr} ${dtb};\0" \
 	"bootscript=echo Running bootscript from ${storagetype} ...;" \
 		   "source ${loadaddr};\0" \
 	"nandloadkernel=nand read ${loadaddr} 0 780000;\0" \
