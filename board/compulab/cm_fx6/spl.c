@@ -369,15 +369,8 @@ void board_init_f(ulong dummy)
 
 void board_boot_order(u32 *spl_boot_list)
 {
-	spl_boot_list[0] = spl_boot_device();
-	switch (spl_boot_list[0]) {
-	case BOOT_DEVICE_SPI:
-		spl_boot_list[1] = BOOT_DEVICE_MMC1;
-		break;
-	case BOOT_DEVICE_MMC1:
-		spl_boot_list[1] = BOOT_DEVICE_SPI;
-		break;
-	}
+	spl_boot_list[0] = BOOT_DEVICE_MMC1;
+	spl_boot_list[1] = BOOT_DEVICE_SPI;
 }
 
 #ifdef CONFIG_SPL_MMC_SUPPORT
